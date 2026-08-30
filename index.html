@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My first website</title>
+    <style>
+        .row{
+            width:720px;
+            margin: 10px auto 10px auto ;
+        }
+        .image-container {
+            display: table-cell;
+            vertical-align: middle;
+            padding:20px;
+        }
+
+        .hover-wrap{
+            position:relative;
+            width:250px;
+            height:250px;
+            cursor:pointer;
+            display:block;
+        }
+        .hover-wrap img{
+            position:absolute;
+            top:0;
+            left:0;
+            width:250px;
+            height:250px;
+            transition: opacity 0.25s ease;
+        }
+        .hover-img{
+            opacity:0;
+            pointer-events:none;
+        }
+        .hover-wrap:hover .hover-img{
+            opacity:1;
+        }
+        .hover-wrap:hover .normal-img{
+            opacity:0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row">
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s1">
+            <img class="normal-img" src="img/icon1.png"/>
+            <img class="hover-img" src="img/icon10.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s2">
+            <img class="normal-img" src="img/icon2.png"/>
+            <img class="hover-img" src="img/icon11.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s3">
+            <img class="normal-img" src="img/icon3.png"/>
+            <img class="hover-img" src="img/icon12.png"/>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s4">
+            <img class="normal-img" src="img/icon4.png"/>
+            <img class="hover-img" src="img/icon13.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s5">
+            <img class="normal-img" src="img/icon5.png"/>
+            <img class="hover-img" src="img/icon14.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s6">
+            <img class="normal-img" src="img/icon6.png"/>
+            <img class="hover-img" src="img/icon15.png"/>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s7">
+            <img class="normal-img" src="img/icon7.png"/>
+            <img class="hover-img" src="img/icon16.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s8">
+            <img class="normal-img" src="img/icon8.png"/>
+            <img class="hover-img" src="img/icon17.png"/>
+        </div>
+    </div>
+    <div class="image-container">
+        <div class="hover-wrap" data-sound="s9">
+            <img class="normal-img" src="img/icon9.png"/>
+            <img class="hover-img" src="img/icon18.png"/>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
+<script>
+const soundList = {
+    s1: new buzz.sound("sound/s1.mp3"),
+    s2: new buzz.sound("sound/s2.mp3"),
+    s3: new buzz.sound("sound/s3.mp3"),
+    s4: new buzz.sound("sound/s4.mp3"),
+    s5: new buzz.sound("sound/s5.mp3"),
+    s6: new buzz.sound("sound/s6.mp3"),
+    s7: new buzz.sound("sound/s7.mp3"),
+    s8: new buzz.sound("sound/s8.mp3"),
+    s9: new buzz.sound("sound/s9.mp3")
+};
+
+function playSoundLimited(soundObj){
+    soundObj.stop();
+    soundObj.play();
+    setTimeout(()=>{
+        soundObj.stop();
+    },5000);
+}
+
+document.querySelectorAll('.hover-wrap').forEach(item=>{
+    item.addEventListener('click',function(){
+        const soundKey = this.getAttribute('data-sound');
+        playSoundLimited(soundList[soundKey]);
+    })
+})
+</script>
+
+</body>
+</html>
